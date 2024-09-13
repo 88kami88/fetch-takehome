@@ -5,12 +5,11 @@ function App() {
   async function onLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    // Create FormData object from the form
     const formData = new FormData(e.currentTarget);
-
-    // Extract values from the FormData object
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
+
+    // validate name and email string
 
     fetch("https://frontend-take-home-service.fetch.com/auth/login", {
       method: "POST",
