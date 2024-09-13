@@ -32,6 +32,8 @@ function App() {
     // use constants for 200
     if (status === 200) {
       setIsLoggedIn(true);
+    } else {
+      // todo
     }
   }
 
