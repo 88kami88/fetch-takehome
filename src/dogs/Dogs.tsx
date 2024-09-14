@@ -21,7 +21,6 @@ export interface Dog {
 }
 
 async function searchDogs(path: string): Promise<[SearchResponse, Dog[]]> {
-  console.log({ path });
   const searchRes = await fetch(`${baseUrl}${path}`, {
     credentials: "include",
   });
