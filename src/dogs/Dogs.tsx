@@ -60,7 +60,7 @@ export default function Dogs() {
   const [prev, setPrev] = useState<string | undefined>();
   const { breed } = useBreed();
 
-  async function onSearch(path: string, b: string | undefined) {
+  async function onSearch(path: string, b: string | undefined = undefined) {
     const [search, dogs] = await searchDogs(path, b);
 
     setNext(search.next);
