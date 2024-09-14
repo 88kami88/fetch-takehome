@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { searchUrl } from "../constants";
 import axios from "axios";
 
-type SearchResultIds = number[];
+type SearchResultIds = string[];
 
 interface SearchResponse {
   resultIds: SearchResultIds;
