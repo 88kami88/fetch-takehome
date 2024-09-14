@@ -20,7 +20,7 @@ interface Dog {
 }
 
 export default function Dogs() {
-  const [dogs, setDogs] = useState<SearchResultIds>([]);
+  const [dogs, setDogs] = useState<Dog[]>([]);
 
   useEffect(() => {
     (async () => {
@@ -45,16 +45,15 @@ export default function Dogs() {
       // TODO handle error
 
       const dogsJson = (await dogsRes.json()) as Dog[];
-      console.log(dogsJson);
 
-      setDogs(resultIds);
+      setDogs(dogsJson);
     })();
   }, []);
 
   return (
     <ul>
       {dogs.map((dog) => (
-        <li key={dog}>{dog}</li>
+        <li key={dog.id}>{dog.name}</li>
       ))}
     </ul>
   );
