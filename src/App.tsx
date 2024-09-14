@@ -5,6 +5,7 @@ import "./App.css";
 import Profile from "./profile/Profile";
 import Dogs from "./dogs/Dogs";
 import BreedFilter from "./dogs/BreedFilter";
+import BreedSort from "./dogs/BreedSort";
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -16,6 +17,7 @@ function App() {
       {isLoggedIn && (
         <>
           <BreedFilter />
+          <BreedSort />
           <Dogs />
         </>
       )}
