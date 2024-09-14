@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { baseUrl, dogsUrl, searchPath } from "../constants";
 import { DogCard } from "./DogCard";
 import { useBreed } from "./use-breed";
@@ -60,14 +60,17 @@ export default function Dogs() {
   const [prev, setPrev] = useState<string | undefined>();
   const { breed } = useBreed();
 
-  async function onSearch(path: string, b: string | undefined = undefined) {
-    const [search, dogs] = await searchDogs(path, b);
+  const onSearch = useCallback(
+    async (path: string) => {
+      const [search, dogs] = await searchDogs(path, breed);
 
-    setNext(search.next);
-    setPrev(search.prev);
+      setNext(search.next);
+      setPrev(search.prev);
 
-    setDogs(dogs);
-  }
+      setDogs(dogs);
+    },
+    [breed, setDogs, setNext, setPrev]
+  );
 
   function onPrev() {
     if (!prev) {
@@ -86,8 +89,8 @@ export default function Dogs() {
   }
 
   useEffect(() => {
-    onSearch(`/dogs${searchPath}`, breed);
-  }, [breed]);
+    onSearch(`/dogs${searchPath}`);
+  }, [breed, onSearch]);
 
   return (
     <>
