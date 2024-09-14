@@ -41,16 +41,14 @@ async function searchDogs(
   breed: string | undefined,
   sort: Sort = "asc"
 ): Promise<[SearchResponse, Dog[]]> {
-  console.log({ sort });
   const queryString = buildQueryString({
     breeds: breed,
     sort: `breed:${sort}`,
   });
-  console.log({ queryString });
+
   const searchUrl = breed
     ? `${baseUrl}${path}${queryString}`
     : `${baseUrl}${path}${queryString}`;
-  console.log({ searchUrl });
 
   const searchRes = await fetch(searchUrl, {
     credentials: "include",
