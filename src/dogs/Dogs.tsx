@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { baseUrl, dogsUrl, searchPath } from "../constants";
 import { DogCard } from "./DogCard";
-import { useBreed } from "./use-breed";
-import { Sort } from "./breed-context";
+import { useBreed } from "../breeds/use-breed";
+import { Sort } from "../breeds/breed-context";
 
 type SearchResultIds = string[];
 

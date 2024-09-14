@@ -1,5 +1,5 @@
 import { Dog } from "./Dogs";
-import useFavorites from "./use-favorites";
+import useFavorites from "../favorites/use-favorites";
 
 interface DogCardProps {
   dog: Dog;

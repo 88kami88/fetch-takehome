@@ -4,8 +4,8 @@ import Login from "./auth/Login";
 import "./App.css";
 import Profile from "./profile/Profile";
 import Dogs from "./dogs/Dogs";
-import BreedFilter from "./dogs/BreedFilter";
-import BreedSort from "./dogs/BreedSort";
+import BreedFilter from "./breeds/BreedFilter";
+import BreedSort from "./breeds/BreedSort";
 
 function App() {
   const { isLoggedIn } = useAuth();
