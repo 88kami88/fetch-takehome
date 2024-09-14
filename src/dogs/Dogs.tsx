@@ -16,24 +16,17 @@ export default function Dogs() {
 
   useEffect(() => {
     (async () => {
-      //   const res = await fetch(searchUrl, {
-      //     credentials: "include",
-      //   });
+      const res = await fetch(searchUrl, {
+        credentials: "include",
+      });
 
-      //   // TODO handle error
+      // TODO handle error
 
-      //   const json = (await res.json()) as SearchResponse;
+      const json = (await res.json()) as SearchResponse;
 
-      //   const resultIds: SearchResultIds = json.resultIds;
+      const resultIds: SearchResultIds = json.resultIds;
 
-      try {
-        const res = await axios.get(searchUrl, {
-          withCredentials: true, // This ensures that cookies are included
-        });
-
-        console.log("here");
-        setDogs(res.data.resultIds);
-      } catch (e) {}
+      setDogs(resultIds);
     })();
   }, []);
 
