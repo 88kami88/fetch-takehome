@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { searchUrl } from "../constants";
+import { dogsUrl, searchUrl } from "../constants";
 
 type SearchResultIds = string[];
 
@@ -10,20 +10,42 @@ interface SearchResponse {
   prev?: string;
 }
 
+interface Dog {
+  id: string;
+  img: string;
+  name: string;
+  age: number;
+  zip_code: string;
+  breed: string;
+}
+
 export default function Dogs() {
   const [dogs, setDogs] = useState<SearchResultIds>([]);
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(searchUrl, {
+      const searchRes = await fetch(searchUrl, {
         credentials: "include",
       });
 
       // TODO handle error
 
-      const json = (await res.json()) as SearchResponse;
+      const searchJson = (await searchRes.json()) as SearchResponse;
+      const resultIds: SearchResultIds = searchJson.resultIds;
 
-      const resultIds: SearchResultIds = json.resultIds;
+      const dogsRes = await fetch(dogsUrl, {
+        body: JSON.stringify(resultIds),
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+
+      // TODO handle error
+
+      const dogsJson = (await dogsRes.json()) as Dog[];
+      console.log(dogsJson);
 
       setDogs(resultIds);
     })();
