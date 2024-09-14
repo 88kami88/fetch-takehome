@@ -5,7 +5,7 @@ export function useBreed() {
   const breedContext = useContext(BreedContext);
 
   if (!breedContext) {
-    throw new Error("useBreed must be used within an BreedProvider");
+    throw new Error("useBreed must be used within a BreedProvider");
   }
 
   return breedContext;
