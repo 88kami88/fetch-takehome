@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { baseUrl, dogsUrl, searchPath } from "../constants";
 import { DogCard } from "./DogCard";
+import { useBreed } from "./use-breed";
 
 type SearchResultIds = string[];
 
@@ -20,8 +21,15 @@ export interface Dog {
   breed: string;
 }
 
-async function searchDogs(path: string): Promise<[SearchResponse, Dog[]]> {
-  const searchRes = await fetch(`${baseUrl}${path}`, {
+async function searchDogs(
+  path: string,
+  breed: string | undefined
+): Promise<[SearchResponse, Dog[]]> {
+  const searchUrl = breed
+    ? `${baseUrl}${path}?breeds=${breed}`
+    : `${baseUrl}${path}`;
+
+  const searchRes = await fetch(searchUrl, {
     credentials: "include",
   });
 
@@ -50,9 +58,10 @@ export default function Dogs() {
   const [dogs, setDogs] = useState<Dog[]>([]);
   const [next, setNext] = useState<string | undefined>();
   const [prev, setPrev] = useState<string | undefined>();
+  const { breed } = useBreed();
 
-  async function onSearch(path = `/dogs${searchPath}`) {
-    const [search, dogs] = await searchDogs(path);
+  async function onSearch(path: string, b: string | undefined) {
+    const [search, dogs] = await searchDogs(path, b);
 
     setNext(search.next);
     setPrev(search.prev);
@@ -77,8 +86,8 @@ export default function Dogs() {
   }
 
   useEffect(() => {
-    onSearch();
-  }, []);
+    onSearch(`/dogs${searchPath}`, breed);
+  }, [breed]);
 
   return (
     <>

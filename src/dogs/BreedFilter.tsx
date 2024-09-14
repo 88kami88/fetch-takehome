@@ -18,7 +18,7 @@ export default function BreedFilter() {
       setBreeds(json);
     })();
   }, []);
-  console.log(breed);
+
   function onBreedSelected(e: FormEvent<HTMLSelectElement>) {
     if (e.currentTarget.value) {
       setBreed(e.currentTarget.value);
