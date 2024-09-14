@@ -7,9 +7,8 @@ interface DogCardProps {
 
 export function DogCard({ dog }: DogCardProps) {
   const { favorites, toggleFavorite } = useFavorites();
-  console.log({ favorites });
 
-  const isFavorite = favorites.includes(dog.id);
+  const isFavorite = favorites.has(dog.id);
 
   return (
     <div>

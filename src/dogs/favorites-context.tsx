@@ -1,7 +1,7 @@
 import { createContext, ReactNode, useCallback, useState } from "react";
 
 interface FavoritesContextType {
-  favorites: string[]; // array of dog ids
+  favorites: Set<string>; // array of dog ids
   toggleFavorite: (dogId: string) => void; // favorites on unfavorites a dog
 }
 
@@ -10,16 +10,20 @@ export const FavoritesContext = createContext<FavoritesContextType | undefined>(
 );
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   const toggleFavorite = useCallback(
     (dogId: string) => {
-      const isFavorite = favorites.includes(dogId);
+      const isFavorite = favorites.has(dogId);
+
+      const newFavorites = new Set(favorites);
 
       if (isFavorite) {
-        setFavorites(favorites.filter((fave) => fave !== dogId));
+        newFavorites.delete(dogId);
+        setFavorites(newFavorites);
       } else {
-        setFavorites([...favorites.filter((fave) => fave !== dogId), dogId]);
+        newFavorites.add(dogId);
+        setFavorites(newFavorites);
       }
     },
     [favorites, setFavorites]
