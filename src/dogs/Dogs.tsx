@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { dogsUrl, searchUrl } from "../constants";
+import { DogCard } from "./DogCard";
 
 type SearchResultIds = string[];
 
@@ -10,7 +11,7 @@ interface SearchResponse {
   prev?: string;
 }
 
-interface Dog {
+export interface Dog {
   id: string;
   img: string;
   name: string;
@@ -53,7 +54,9 @@ export default function Dogs() {
   return (
     <ul>
       {dogs.map((dog) => (
-        <li key={dog.id}>{dog.name}</li>
+        <li key={dog.id}>
+          <DogCard dog={dog} />
+        </li>
       ))}
     </ul>
   );
