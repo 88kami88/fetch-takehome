@@ -6,7 +6,7 @@ interface DogCardProps {
 }
 
 export function DogCard({ dog }: DogCardProps) {
-  const { favorites, favorite, unfavorite } = useFavorites();
+  const { favorites, toggleFavorite } = useFavorites();
   console.log({ favorites });
 
   const isFavorite = favorites.includes(dog.id);
@@ -23,7 +23,9 @@ export function DogCard({ dog }: DogCardProps) {
       <div>Age: {dog.age}</div>
       <div>Breed: {dog.breed}</div>
       <div>Zip code: {dog.zip_code}</div>
-      <button onClick={() => favorite(dog.id)}>{isFavorite ? "♥" : "♡"}</button>
+      <button onClick={() => toggleFavorite(dog.id)}>
+        {isFavorite ? "♥" : "♡"}
+      </button>
     </div>
   );
 }
