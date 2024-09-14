@@ -90,7 +90,7 @@ export default function Dogs() {
 
   useEffect(() => {
     onSearch(`/dogs${searchPath}`);
-  }, [breed, onSearch]);
+  }, [breed, onSearch]); // must re-search when breed changes even though it's not a direct dependency
 
   return (
     <>
