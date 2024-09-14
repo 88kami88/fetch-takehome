@@ -1,5 +1,6 @@
 import { FormEvent } from "react";
 import { useAuth } from "./use-auth-context";
+import { authUrl } from "../constants";
 
 export default function Login() {
   const { setIsLoggedIn } = useAuth();
@@ -13,19 +14,17 @@ export default function Login() {
 
     // validate name and email string
 
-    const res = await fetch(
-      "https://frontend-take-home-service.fetch.com/auth/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-        }),
-      }
-    );
+    // move fetching to useAuth
+    const res = await fetch(authUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+      }),
+    });
 
     const status = res.status;
 

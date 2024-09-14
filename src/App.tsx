@@ -5,6 +5,7 @@ import Login from "./auth/Login";
 
 import "./App.css";
 import Profile from "./profile/Profile";
+import Dogs from "./dogs/Dogs";
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -13,6 +14,7 @@ function App() {
     <>
       {isLoggedIn && <Profile />}
       {!isLoggedIn && <Login />}
+      {isLoggedIn && <Dogs />}
     </>
   );
 }
