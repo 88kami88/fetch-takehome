@@ -16,6 +16,7 @@ export default function Login() {
 
     // move fetching to useAuth
     const res = await fetch(authUrl, {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -11,7 +11,6 @@ export const AuthContext = createContext<AuthContextType | undefined>(
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log({ isLoggedIn });
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
