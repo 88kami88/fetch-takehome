@@ -3,11 +3,14 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { AuthProvider } from "./auth/auth-context.tsx";
+import { BreedProvider } from "./dogs/breed-context.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
-      <App />
+      <BreedProvider>
+        <App />
+      </BreedProvider>
     </AuthProvider>
   </StrictMode>
 );

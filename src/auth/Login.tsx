@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { useAuth } from "./use-auth-context";
+import { useAuth } from "./use-auth";
 import { authUrl } from "../constants";
 
 export default function Login() {
