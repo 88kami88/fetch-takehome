@@ -5,6 +5,7 @@ import useFavorites from "../favorites/use-favorites";
 import { useState } from "react";
 import { Dog } from "../dogs/Dogs";
 import { DogCard } from "../dogs/DogCard";
+import { getDogsById } from "../dogs/dog-service";
 
 interface MatchResponse {
   match: string;
@@ -29,9 +30,13 @@ export function MatchButton() {
 
     const matchJson = (await matchRes.json()) as MatchResponse;
 
-    // setMatch(json);
+    const dogs = await getDogsById([matchJson.match]);
 
-    onModalOpen();
+    if (dogs.length) {
+      setMatch(dogs[0]);
+
+      onModalOpen();
+    }
   }
 
   const onModalOpen = () => setModalOpen(true);

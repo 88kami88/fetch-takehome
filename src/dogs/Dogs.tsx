@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { baseUrl, dogsUrl, searchPath } from "../constants";
+import { baseUrl, searchPath } from "../constants";
 import { DogCard } from "./DogCard";
 import { useBreed } from "../breeds/use-breed";
 import { Sort } from "../breeds/breed-context";
