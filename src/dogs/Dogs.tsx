@@ -3,6 +3,7 @@ import { baseUrl, dogsUrl, searchPath } from "../constants";
 import { DogCard } from "./DogCard";
 import { useBreed } from "../breeds/use-breed";
 import { Sort } from "../breeds/breed-context";
+import { getDogsById } from "./dog-service";
 
 type SearchResultIds = string[];
 
@@ -59,20 +60,11 @@ async function searchDogs(
   const searchJson = (await searchRes.json()) as SearchResponse;
   const resultIds: SearchResultIds = searchJson.resultIds;
 
-  const dogsRes = await fetch(dogsUrl, {
-    body: JSON.stringify(resultIds),
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-  });
+  const dogs = await getDogsById(resultIds);
 
   // TODO handle error
 
-  const dogsJson = (await dogsRes.json()) as Dog[];
-
-  return [searchJson, dogsJson];
+  return [searchJson, dogs];
 }
 
 export default function Dogs() {
