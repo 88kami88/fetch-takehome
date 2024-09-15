@@ -61,7 +61,7 @@ export function MatchButton() {
             }}
           >
             <h2>We found a match!</h2>
-            <DogCard dog={match} />
+            <DogCard canFavorite={false} dog={match} />
             <Button onClick={onModalClose} variant="contained">
               Close
             </Button>
