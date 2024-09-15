@@ -1,4 +1,4 @@
-import { Card } from "@mui/material";
+import { Button, Card } from "@mui/material";
 
 import { Dog } from "./Dogs";
 import useFavorites from "../favorites/use-favorites";
@@ -28,9 +28,12 @@ export function DogCard({ canFavorite = true, dog }: DogCardProps) {
       <div>Breed: {dog.breed}</div>
       <div>Zip code: {dog.zip_code}</div>
       {canFavorite && (
-        <button onClick={() => toggleFavorite(dog.id)}>
+        <Button
+          onClick={() => toggleFavorite(dog.id)}
+          sx={{ bgcolor: "secondary.dark" }}
+        >
           {isFavorite ? "♥" : "♡"}
-        </button>
+        </Button>
       )}
     </Card>
   );

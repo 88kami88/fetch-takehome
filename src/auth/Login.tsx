@@ -1,7 +1,7 @@
 import { FormEvent } from "react";
 import { useAuth } from "./use-auth";
 import { authUrl } from "../constants";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 import "./Login.css";
 
@@ -51,7 +51,9 @@ export default function Login() {
         name="email"
         placeholder="email"
       />
-      <button type="submit">Login</button>
+      <Button variant="contained" type="submit">
+        Login
+      </Button>
     </form>
   );
 }
