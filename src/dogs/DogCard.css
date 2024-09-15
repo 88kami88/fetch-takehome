@@ -1,0 +1,8 @@
+.dog-card {
+  height: 520px;
+  width: 500px;
+}
+
+.dog-card img {
+  max-height: 375px;
+}

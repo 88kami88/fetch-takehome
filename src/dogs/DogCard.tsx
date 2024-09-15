@@ -1,5 +1,9 @@
+import { Card } from "@mui/material";
+
 import { Dog } from "./Dogs";
 import useFavorites from "../favorites/use-favorites";
+
+import "./DogCard.css";
 
 interface DogCardProps {
   dog: Dog;
@@ -12,7 +16,7 @@ export function DogCard({ canFavorite = true, dog }: DogCardProps) {
   const isFavorite = favorites.has(dog.id);
 
   return (
-    <div>
+    <Card variant="outlined" className="dog-card">
       <div>
         <img
           src={dog.img}
@@ -28,6 +32,6 @@ export function DogCard({ canFavorite = true, dog }: DogCardProps) {
           {isFavorite ? "♥" : "♡"}
         </button>
       )}
-    </div>
+    </Card>
   );
 }

@@ -1,6 +1,9 @@
 import { FormEvent } from "react";
 import { useAuth } from "./use-auth";
 import { authUrl } from "../constants";
+import { TextField } from "@mui/material";
+
+import "./Login.css";
 
 export default function Login() {
   const { setIsLoggedIn } = useAuth();
@@ -38,11 +41,11 @@ export default function Login() {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <form className="login-form" onSubmit={onLogin}>
       <label>Name</label>
-      <input type="text" name="name" placeholder="name" />
+      <TextField type="text" name="name" placeholder="name" />
       <label>Email</label>
-      <input type="text" name="email" placeholder="email" />
+      <TextField type="text" name="email" placeholder="email" />
       <button type="submit">Login</button>
     </form>
   );

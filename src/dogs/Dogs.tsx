@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
+
 import { baseUrl, searchPath } from "../constants";
 import { DogCard } from "./DogCard";
 import { useBreed } from "../breeds/use-breed";
 import { Sort } from "../breeds/breed-context";
 import { getDogsById } from "./dog-service";
+
+import "./Dogs.css";
 
 type SearchResultIds = string[];
 
@@ -107,7 +110,7 @@ export default function Dogs() {
 
   return (
     <>
-      <ul>
+      <ul className="dogs">
         {dogs.map((dog) => (
           <li key={dog.id}>
             <DogCard dog={dog} />
