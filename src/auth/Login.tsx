@@ -43,9 +43,14 @@ export default function Login() {
   return (
     <form className="login-form" onSubmit={onLogin}>
       <label>Name</label>
-      <TextField type="text" name="name" placeholder="name" />
+      <TextField className="field" type="text" name="name" placeholder="name" />
       <label>Email</label>
-      <TextField type="text" name="email" placeholder="email" />
+      <TextField
+        className="field"
+        type="text"
+        name="email"
+        placeholder="email"
+      />
       <button type="submit">Login</button>
     </form>
   );
