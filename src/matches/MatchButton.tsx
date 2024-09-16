@@ -44,7 +44,12 @@ export function MatchButton() {
 
   return (
     <>
-      <button onClick={onMatch}>Match</button>
+      <Button
+        onClick={onMatch}
+        sx={{ color: "secondary.dark", bgcolor: "primary.light" }}
+      >
+        Match
+      </Button>
       {match && (
         <Modal open={isModalOpen}>
           <Box

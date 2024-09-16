@@ -29,8 +29,8 @@ function App() {
           >
             <BreedFilter />
             <BreedSort />
+            <MatchButton />
           </Box>
-          <MatchButton />
           <Dogs />
         </>
       )}
