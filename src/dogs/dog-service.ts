@@ -1,6 +1,5 @@
 import { Sort } from "../breeds/breed-context";
 import { baseUrl, dogsUrl } from "../constants";
-import { Dog } from "./Dogs";
 
 type SearchResultIds = string[];
 
@@ -9,6 +8,15 @@ interface SearchResponse {
   total: number;
   next?: string;
   prev?: string;
+}
+
+export interface Dog {
+  id: string;
+  img: string;
+  name: string;
+  age: number;
+  zip_code: string;
+  breed: string;
 }
 
 function buildQueryString(

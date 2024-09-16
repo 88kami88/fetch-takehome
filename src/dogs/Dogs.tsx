@@ -3,18 +3,9 @@ import { useCallback, useEffect, useState } from "react";
 import { searchPath } from "../constants";
 import { DogCard } from "./DogCard";
 import { useBreed } from "../breeds/use-breed";
+import { Dog, searchDogs } from "./dog-service";
 
 import "./Dogs.css";
-import { searchDogs } from "./dog-service";
-
-export interface Dog {
-  id: string;
-  img: string;
-  name: string;
-  age: number;
-  zip_code: string;
-  breed: string;
-}
 
 export default function Dogs() {
   const [dogs, setDogs] = useState<Dog[]>([]);

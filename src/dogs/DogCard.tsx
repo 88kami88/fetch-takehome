@@ -1,6 +1,6 @@
 import { Box, Button, Card } from "@mui/material";
 
-import { Dog } from "./Dogs";
+import { Dog } from "./dog-service";
 import useFavorites from "../favorites/use-favorites";
 
 import "./DogCard.css";

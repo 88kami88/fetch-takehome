@@ -3,7 +3,7 @@ import { Box, Button, Modal } from "@mui/material";
 import { matchesUrl } from "../constants";
 import useFavorites from "../favorites/use-favorites";
 import { useState } from "react";
-import { Dog } from "../dogs/Dogs";
+import { Dog } from "../dogs/dog-service";
 import { DogCard } from "../dogs/DogCard";
 import { getDogsById } from "../dogs/dog-service";
 
