@@ -19,7 +19,14 @@ function App() {
       {!isLoggedIn && <Login />}
       {isLoggedIn && (
         <>
-          <Box>
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              gap: "1rem",
+              marginBottom: "1rem",
+            }}
+          >
             <BreedFilter />
             <BreedSort />
           </Box>
