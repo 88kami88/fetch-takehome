@@ -19,13 +19,13 @@ export default function Dogs() {
   const onSearch = useCallback(
     async (path: string, isCursor: boolean) => {
       setDogs([]);
+      setSearchResults(undefined);
       setError(undefined);
 
       try {
         const [search, dogs] = await searchDogs(path, breeds, sort, isCursor);
 
         setSearchResults(search);
-
         setDogs(dogs);
       } catch {
         setError("Unable to fetch dogs");
