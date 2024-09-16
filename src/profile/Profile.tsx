@@ -19,7 +19,14 @@ export default function Profile() {
   }
 
   return (
-    <Box sx={{ display: "flex", alignItems: "center", justifyContent: "end" }}>
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "end",
+        width: "100%",
+      }}
+    >
       Welcome, {username} <Button onClick={onLogout}>Logout</Button>
     </Box>
   );

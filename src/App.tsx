@@ -1,3 +1,5 @@
+import { Box } from "@mui/material";
+
 import { useAuth } from "./auth/use-auth";
 import Login from "./auth/Login";
 import Profile from "./profile/Profile";
@@ -17,8 +19,10 @@ function App() {
       {!isLoggedIn && <Login />}
       {isLoggedIn && (
         <>
-          <BreedFilter />
-          <BreedSort />
+          <Box>
+            <BreedFilter />
+            <BreedSort />
+          </Box>
           <MatchButton />
           <Dogs />
         </>
