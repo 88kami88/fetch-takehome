@@ -6,6 +6,7 @@ import { useBreed } from "../breeds/use-breed";
 import { Dog, searchDogs } from "./dog-service";
 
 import "./Dogs.css";
+import { Box } from "@mui/material";
 
 export default function Dogs() {
   const [dogs, setDogs] = useState<Dog[]>([]);
@@ -54,8 +55,10 @@ export default function Dogs() {
           </li>
         ))}
       </ul>
-      {prev && <button onClick={onPrev}>Prev</button>}
-      {next && <button onClick={onNext}>Next</button>}
+      <Box sx={{ display: "flex", flexDirection: "row", gap: "1rem" }}>
+        {prev && <button onClick={onPrev}>Prev</button>}
+        {next && <button onClick={onNext}>Next</button>}
+      </Box>
     </>
   );
 }
