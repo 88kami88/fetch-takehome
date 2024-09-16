@@ -58,9 +58,7 @@ export async function searchDogs(
     sort: `breed:${sort}`,
   });
 
-  const searchUrl = breed
-    ? `${baseUrl}${path}${queryString}`
-    : `${baseUrl}${path}${queryString}`;
+  const searchUrl = `${baseUrl}${path}${queryString}`;
 
   const searchRes = await fetch(searchUrl, {
     credentials: "include",
