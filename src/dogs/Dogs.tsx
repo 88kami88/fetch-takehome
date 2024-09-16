@@ -11,18 +11,18 @@ export default function Dogs() {
   const [dogs, setDogs] = useState<Dog[]>([]);
   const [next, setNext] = useState<string | undefined>();
   const [prev, setPrev] = useState<string | undefined>();
-  const { breed, sort } = useBreed();
+  const { breeds, sort } = useBreed();
 
   const onSearch = useCallback(
-    async (path: string) => {
-      const [search, dogs] = await searchDogs(path, breed, sort);
+    async (path: string, isCursor: boolean) => {
+      const [search, dogs] = await searchDogs(path, breeds, sort, isCursor);
 
       setNext(search.next);
       setPrev(search.prev);
 
       setDogs(dogs);
     },
-    [breed, setDogs, setNext, setPrev, sort]
+    [breeds, setDogs, setNext, setPrev, sort]
   );
 
   function onPrev() {
@@ -30,7 +30,7 @@ export default function Dogs() {
       return;
     }
 
-    onSearch(prev);
+    onSearch(prev, true);
   }
 
   function onNext() {
@@ -38,12 +38,12 @@ export default function Dogs() {
       return;
     }
 
-    onSearch(next);
+    onSearch(next, true);
   }
 
   useEffect(() => {
-    onSearch(`/dogs${searchPath}`);
-  }, [breed, onSearch, sort]); // must re-search when breed or sort changes even though it's not a direct dependency
+    onSearch(`/dogs${searchPath}`, false);
+  }, [breeds, onSearch, sort]); // must re-search when breed or sort changes even though it's not a direct dependency
 
   return (
     <>

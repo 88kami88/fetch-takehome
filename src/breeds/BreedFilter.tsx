@@ -5,7 +5,7 @@ import { Autocomplete, Box, TextField } from "@mui/material";
 
 export default function BreedFilter() {
   const [breeds, setBreeds] = useState<string[] | undefined>();
-  const { setBreed } = useBreed();
+  const { selectBreeds } = useBreed();
 
   useEffect(() => {
     (async () => {
@@ -20,12 +20,8 @@ export default function BreedFilter() {
     })();
   }, []);
 
-  function onBreedSelected(breed: string | null) {
-    if (breed) {
-      setBreed(breed);
-    } else {
-      setBreed(null);
-    }
+  function onBreedsSelected(breeds: string[]) {
+    selectBreeds(breeds);
   }
 
   const options = breeds ? ["", ...breeds] : [""];
@@ -34,12 +30,13 @@ export default function BreedFilter() {
     <Box sx={{ width: 300, margin: "0 auto", paddingTop: 0 }}>
       <Autocomplete
         // value={breed ?? ""}
-        onChange={(_, newValue) => onBreedSelected(newValue)}
+        onChange={(_, newValue) => onBreedsSelected(newValue)}
         options={options}
         renderInput={(params) => (
           <TextField {...params} label="Select a breed" variant="outlined" />
         )}
         isOptionEqualToValue={(option, value) => option === value} // Fix for value equality
+        multiple
       />
     </Box>
   );

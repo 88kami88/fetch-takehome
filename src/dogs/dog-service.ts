@@ -20,14 +20,24 @@ export interface Dog {
 }
 
 function buildQueryString(
-  params: Record<string, string | number | undefined | null>
+  params: Record<
+    string,
+    string | number | (string | number)[] | undefined | null
+  >
 ): string {
   const queryString = Object.entries(params)
     .filter(([, value]) => value !== undefined && value !== null)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`
-    )
+    .flatMap(([key, value]) => {
+      if (Array.isArray(value)) {
+        // For arrays, map each element to 'key=value'
+        return value.map(
+          (val) =>
+            `${encodeURIComponent(key)}=${encodeURIComponent(String(val))}`
+        );
+      }
+      // For non-arrays, map the single 'key=value'
+      return `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`;
+    })
     .join("&");
 
   return queryString ? `?${queryString}` : "";
@@ -50,15 +60,18 @@ export async function getDogsById(ids: string[]) {
 
 export async function searchDogs(
   path: string,
-  breed: string | undefined,
-  sort: Sort = "asc"
+  breeds: string[],
+  sort: Sort = "asc",
+  isCursor = false
 ): Promise<[SearchResponse, Dog[]]> {
   const queryString = buildQueryString({
-    breeds: breed,
+    breeds,
     sort: `breed:${sort}`,
   });
 
-  const searchUrl = `${baseUrl}${path}${queryString}`;
+  const searchUrl = isCursor
+    ? `${baseUrl}${path}`
+    : `${baseUrl}${path}${queryString}`;
 
   const searchRes = await fetch(searchUrl, {
     credentials: "include",
