@@ -1,5 +1,6 @@
 import { Sort } from "../breeds/breed-context";
 import { baseUrl, dogsUrl } from "../constants";
+import { buildQueryString } from "../util";
 
 type SearchResultIds = string[];
 
@@ -17,30 +18,6 @@ export interface Dog {
   age: number;
   zip_code: string;
   breed: string;
-}
-
-function buildQueryString(
-  params: Record<
-    string,
-    string | number | (string | number)[] | undefined | null
-  >
-): string {
-  const queryString = Object.entries(params)
-    .filter(([, value]) => value !== undefined && value !== null)
-    .flatMap(([key, value]) => {
-      if (Array.isArray(value)) {
-        // For arrays, map each element to 'key=value'
-        return value.map(
-          (val) =>
-            `${encodeURIComponent(key)}=${encodeURIComponent(String(val))}`
-        );
-      }
-      // For non-arrays, map the single 'key=value'
-      return `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`;
-    })
-    .join("&");
-
-  return queryString ? `?${queryString}` : "";
 }
 
 export async function getDogsById(ids: string[]) {
