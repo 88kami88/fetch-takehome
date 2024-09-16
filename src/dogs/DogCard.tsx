@@ -20,6 +20,7 @@ export function DogCard({ canFavorite = true, dog }: DogCardProps) {
       variant="outlined"
       className="dog-card"
       sx={{
+        alignItems: "center",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",

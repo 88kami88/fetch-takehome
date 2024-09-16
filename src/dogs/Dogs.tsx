@@ -1,21 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { baseUrl, searchPath } from "../constants";
+import { searchPath } from "../constants";
 import { DogCard } from "./DogCard";
 import { useBreed } from "../breeds/use-breed";
-import { Sort } from "../breeds/breed-context";
-import { getDogsById } from "./dog-service";
 
 import "./Dogs.css";
-
-type SearchResultIds = string[];
-
-interface SearchResponse {
-  resultIds: SearchResultIds;
-  total: number;
-  next?: string;
-  prev?: string;
-}
+import { searchDogs } from "./dog-service";
 
 export interface Dog {
   id: string;
@@ -24,50 +14,6 @@ export interface Dog {
   age: number;
   zip_code: string;
   breed: string;
-}
-
-function buildQueryString(
-  params: Record<string, string | number | undefined | null>
-): string {
-  const queryString = Object.entries(params)
-    .filter(([, value]) => value !== undefined && value !== null)
-    .map(
-      ([key, value]) =>
-        `${encodeURIComponent(key)}=${encodeURIComponent(String(value))}`
-    )
-    .join("&");
-
-  return queryString ? `?${queryString}` : "";
-}
-
-async function searchDogs(
-  path: string,
-  breed: string | undefined,
-  sort: Sort = "asc"
-): Promise<[SearchResponse, Dog[]]> {
-  const queryString = buildQueryString({
-    breeds: breed,
-    sort: `breed:${sort}`,
-  });
-
-  const searchUrl = breed
-    ? `${baseUrl}${path}${queryString}`
-    : `${baseUrl}${path}${queryString}`;
-
-  const searchRes = await fetch(searchUrl, {
-    credentials: "include",
-  });
-
-  // TODO handle error
-
-  const searchJson = (await searchRes.json()) as SearchResponse;
-  const resultIds: SearchResultIds = searchJson.resultIds;
-
-  const dogs = await getDogsById(resultIds);
-
-  // TODO handle error
-
-  return [searchJson, dogs];
 }
 
 export default function Dogs() {
