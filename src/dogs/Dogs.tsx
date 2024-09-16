@@ -6,7 +6,7 @@ import { useBreed } from "../breeds/use-breed";
 import { Dog, searchDogs, SearchResponse } from "./dog-service";
 
 import "./Dogs.css";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 
 export default function Dogs() {
   const [dogs, setDogs] = useState<Dog[]>([]);
@@ -14,10 +14,12 @@ export default function Dogs() {
     SearchResponse | undefined
   >();
   const [error, setError] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
   const { breeds, sort } = useBreed();
 
   const onSearch = useCallback(
     async (path: string, isCursor: boolean) => {
+      setIsLoading(true);
       setDogs([]);
       setSearchResults(undefined);
       setError(undefined);
@@ -29,6 +31,8 @@ export default function Dogs() {
         setDogs(dogs);
       } catch {
         setError("Unable to fetch dogs");
+      } finally {
+        setIsLoading(false);
       }
     },
     [breeds, setDogs, setSearchResults, sort]
@@ -60,33 +64,48 @@ export default function Dogs() {
 
   return (
     <>
-      <Box sx={{ paddingBottom: "100px" }}>
-        <ul className="dogs">
-          {dogs.map((dog) => (
-            <li key={dog.id}>
-              <DogCard dog={dog} />
-            </li>
-          ))}
-        </ul>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "1rem",
-          position: "fixed",
-          bottom: 0,
-          left: 0,
-          width: "100%",
-          justifyContent: "center",
-          padding: "10px 20px",
-          backgroundColor: "white",
-          boxShadow: "0 -2px 5px rgba(0,0,0,0.1)",
-        }}
-      >
-        {searchResults?.prev && <button onClick={onPrev}>Prev</button>}
-        {searchResults?.next && <button onClick={onNext}>Next</button>}
-      </Box>
+      {isLoading ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <>
+          <Box sx={{ paddingBottom: "100px" }}>
+            <ul className="dogs">
+              {dogs.map((dog) => (
+                <li key={dog.id}>
+                  <DogCard dog={dog} />
+                </li>
+              ))}
+            </ul>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              gap: "1rem",
+              position: "fixed",
+              bottom: 0,
+              left: 0,
+              width: "100%",
+              justifyContent: "center",
+              padding: "10px 20px",
+              backgroundColor: "white",
+              boxShadow: "0 -2px 5px rgba(0,0,0,0.1)",
+            }}
+          >
+            {searchResults?.prev && <button onClick={onPrev}>Prev</button>}
+            {searchResults?.next && <button onClick={onNext}>Next</button>}
+          </Box>
+        </>
+      )}
     </>
   );
 }
