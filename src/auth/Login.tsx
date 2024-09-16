@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 import { useAuth } from "./use-auth";
-import { authUrl } from "../constants";
+import { loginUrl } from "../constants";
 import { Button, TextField } from "@mui/material";
 
 import "./Login.css";
@@ -18,7 +18,7 @@ export default function Login() {
     // validate name and email string
 
     // move fetching to useAuth
-    const res = await fetch(authUrl, {
+    const res = await fetch(loginUrl, {
       credentials: "include",
       method: "POST",
       headers: {
