@@ -6,7 +6,7 @@ import { Button, TextField } from "@mui/material";
 import "./Login.css";
 
 export default function Login() {
-  const { setIsLoggedIn } = useAuth();
+  const { setIsLoggedIn, setUsername } = useAuth();
 
   async function onLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,6 +35,7 @@ export default function Login() {
     // use constants for 200
     if (status === 200) {
       setIsLoggedIn(true);
+      setUsername(name);
     } else {
       // todo
     }
