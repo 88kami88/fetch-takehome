@@ -3,7 +3,7 @@ import { baseUrl, dogsUrl } from "../constants";
 
 type SearchResultIds = string[];
 
-interface SearchResponse {
+export interface SearchResponse {
   resultIds: SearchResultIds;
   total: number;
   next?: string;

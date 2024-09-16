@@ -3,15 +3,16 @@ import { useCallback, useEffect, useState } from "react";
 import { searchPath } from "../constants";
 import { DogCard } from "./DogCard";
 import { useBreed } from "../breeds/use-breed";
-import { Dog, searchDogs } from "./dog-service";
+import { Dog, searchDogs, SearchResponse } from "./dog-service";
 
 import "./Dogs.css";
 import { Box } from "@mui/material";
 
 export default function Dogs() {
   const [dogs, setDogs] = useState<Dog[]>([]);
-  const [next, setNext] = useState<string | undefined>();
-  const [prev, setPrev] = useState<string | undefined>();
+  const [searchResults, setSearchResults] = useState<
+    SearchResponse | undefined
+  >();
   const [error, setError] = useState<string | undefined>();
   const { breeds, sort } = useBreed();
 
@@ -23,31 +24,30 @@ export default function Dogs() {
       try {
         const [search, dogs] = await searchDogs(path, breeds, sort, isCursor);
 
-        setNext(search.next);
-        setPrev(search.prev);
+        setSearchResults(search);
 
         setDogs(dogs);
       } catch {
         setError("Unable to fetch dogs");
       }
     },
-    [breeds, setDogs, setNext, setPrev, sort]
+    [breeds, setDogs, setSearchResults, sort]
   );
 
   function onPrev() {
-    if (!prev) {
+    if (!searchResults?.prev) {
       return;
     }
 
-    onSearch(prev, true);
+    onSearch(searchResults.prev, true);
   }
 
   function onNext() {
-    if (!next) {
+    if (!searchResults?.next) {
       return;
     }
 
-    onSearch(next, true);
+    onSearch(searchResults.next, true);
   }
 
   useEffect(() => {
@@ -84,8 +84,8 @@ export default function Dogs() {
           boxShadow: "0 -2px 5px rgba(0,0,0,0.1)",
         }}
       >
-        {prev && <button onClick={onPrev}>Prev</button>}
-        {next && <button onClick={onNext}>Next</button>}
+        {searchResults?.prev && <button onClick={onPrev}>Prev</button>}
+        {searchResults?.next && <button onClick={onNext}>Next</button>}
       </Box>
     </>
   );
