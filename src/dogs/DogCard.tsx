@@ -23,7 +23,9 @@ export function DogCard({ canFavorite = true, dog }: DogCardProps) {
         alignItems: "center",
         display: "flex",
         flexDirection: "column",
+        height: "550px",
         justifyContent: "space-between",
+        width: "500px",
       }}
     >
       <div>
