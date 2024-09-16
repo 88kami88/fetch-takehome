@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useBreed } from "./use-breed";
 
 export default function BreedSort() {
@@ -9,10 +9,10 @@ export default function BreedSort() {
   };
 
   return (
-    <div>
+    <Box>
       <Button onClick={toggleSortOrder}>
         Sort by breed {sort === "asc" ? "🔼" : "🔽"}
       </Button>
-    </div>
+    </Box>
   );
 }

@@ -28,12 +28,12 @@ export function DogCard({ canFavorite = true, dog }: DogCardProps) {
         width: "500px",
       }}
     >
-      <div>
+      <Box>
         <img
           src={dog.img}
           alt={`${dog.name}, ${dog.breed}, ${dog.age}, ${dog.zip_code}`}
         />
-      </div>
+      </Box>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
         <Box
           sx={{
@@ -43,10 +43,10 @@ export function DogCard({ canFavorite = true, dog }: DogCardProps) {
             padding: "1rem",
           }}
         >
-          <div>Name: {dog.name}</div>
-          <div>Age: {dog.age}</div>
-          <div>Breed: {dog.breed}</div>
-          <div>Zip code: {dog.zip_code}</div>
+          <Box>Name: {dog.name}</Box>
+          <Box>Age: {dog.age}</Box>
+          <Box>Breed: {dog.breed}</Box>
+          <Box>Zip code: {dog.zip_code}</Box>
         </Box>
         {canFavorite && (
           <Button
