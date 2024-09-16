@@ -46,7 +46,9 @@ export function MatchButton() {
     <>
       <Button
         onClick={onMatch}
-        sx={{ color: "secondary.dark", bgcolor: "primary.light" }}
+        // sx={{ color: "secondary.dark", bgcolor: "primary.light" }}
+        disabled={!favorites.size}
+        variant="outlined"
       >
         Match
       </Button>

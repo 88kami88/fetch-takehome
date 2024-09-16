@@ -23,6 +23,7 @@ function App() {
             sx={{
               alignItems: "center",
               display: "flex",
+              flexWrap: "wrap",
               gap: "1rem",
               marginBottom: "1rem",
             }}

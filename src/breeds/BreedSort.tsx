@@ -10,7 +10,7 @@ export default function BreedSort() {
 
   return (
     <Box>
-      <Button onClick={toggleSortOrder}>
+      <Button onClick={toggleSortOrder} variant="outlined">
         Sort by breed {sort === "asc" ? "🔼" : "🔽"}
       </Button>
     </Box>
