@@ -32,10 +32,19 @@ export function DogCard({ canFavorite = true, dog }: DogCardProps) {
         />
       </div>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <div>Name: {dog.name}</div>
-        <div>Age: {dog.age}</div>
-        <div>Breed: {dog.breed}</div>
-        <div>Zip code: {dog.zip_code}</div>
+        <Box
+          sx={{
+            alignItems: "start",
+            display: "flex",
+            flexDirection: "column",
+            padding: "1rem",
+          }}
+        >
+          <div>Name: {dog.name}</div>
+          <div>Age: {dog.age}</div>
+          <div>Breed: {dog.breed}</div>
+          <div>Zip code: {dog.zip_code}</div>
+        </Box>
         {canFavorite && (
           <Button
             onClick={() => toggleFavorite(dog.id)}

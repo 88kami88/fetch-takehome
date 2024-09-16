@@ -63,6 +63,10 @@ export function MatchButton() {
               border: "2px solid #000",
               boxShadow: 24,
               p: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: "1rem",
             }}
           >
             <h2>We found a match!</h2>
