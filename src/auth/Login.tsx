@@ -60,19 +60,19 @@ export default function Login() {
 
   return (
     <form className="login-form" onSubmit={onLogin}>
-      <label>Name</label>
       <TextField
         className="field"
         type="text"
+        label="Name"
         name="name"
         placeholder="name"
         error={!!nameError}
         helperText={nameError}
       />
-      <label>Email</label>
       <TextField
         className="field"
         type="text"
+        label="Email"
         name="email"
         placeholder="email"
         error={!!emailError}
