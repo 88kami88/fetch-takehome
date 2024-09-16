@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { breedsUrl } from "../constants";
 import { useBreed } from "./use-breed";
 import { Autocomplete, Box, TextField } from "@mui/material";
@@ -20,28 +20,20 @@ export default function BreedFilter() {
     })();
   }, []);
 
-  function onBreedSelected(breed: string) {
+  function onBreedSelected(breed: string | null) {
     if (breed) {
       setBreed(breed);
     } else {
-      setBreed(undefined);
+      setBreed(null);
     }
   }
 
-  if (!breeds) {
-    return (
-      <select>
-        <option>loading...</option>
-      </select>
-    );
-  }
-
-  const options = ["", ...breeds];
+  const options = breeds ? ["", ...breeds] : "";
 
   return (
     <Box sx={{ width: 300, margin: "0 auto", paddingTop: 0 }}>
       <Autocomplete
-        value={breed}
+        // value={breed ?? ""}
         onChange={(event, newValue) => onBreedSelected(newValue)}
         options={options}
         renderInput={(params) => (
