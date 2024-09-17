@@ -9,13 +9,13 @@ export default function Dogs() {
 
   function onPrev() {
     if (searchResults?.prev) {
-      fetchDogs(searchResults?.prev, true);
+      fetchDogs(searchResults.prev, true);
     }
   }
 
   function onNext() {
     if (searchResults?.next) {
-      fetchDogs(searchResults?.next, true);
+      fetchDogs(searchResults.next, true);
     }
   }
 
