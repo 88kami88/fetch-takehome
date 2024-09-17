@@ -4,26 +4,23 @@ import useFavorites from "../favorites/use-favorites";
 import { useState } from "react";
 import { Dog } from "../dogs/dog-service";
 import { DogCard } from "../dogs/DogCard";
-import { getMatch } from "./match-service";
+import { useMatch } from "./use-match";
 
 export function MatchButton() {
   const { favorites } = useFavorites();
-  const [match, setMatch] = useState<Dog | null>(null);
+
+  const [match, setMatch] = useState<Dog>();
+  const { getMatch, isLoading, error } = useMatch();
+
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
 
   async function onMatch() {
-    setIsLoading(true);
-    setMatch(null);
-
+    setMatch(undefined);
     setModalOpen(true);
 
-    try {
-      const dog = await getMatch([...favorites]);
-
-      setMatch(dog);
-    } finally {
-      setIsLoading(false);
+    const match = await getMatch();
+    if (match) {
+      setMatch(match);
     }
   }
 
@@ -58,6 +55,7 @@ export function MatchButton() {
           }}
         >
           <h2>{isLoading ? "Matching..." : "We found a match!"}</h2>
+          {error && error}
           {isLoading && <CircularProgress />}
           {match && <DogCard canFavorite={false} dog={match} />}
           <Button onClick={onModalClose} variant="contained">
