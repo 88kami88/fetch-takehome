@@ -28,12 +28,7 @@ export function MatchButton() {
 
   return (
     <>
-      <Button
-        onClick={onMatch}
-        // sx={{ color: "secondary.dark", bgcolor: "primary.light" }}
-        disabled={!favorites.size}
-        variant="outlined"
-      >
+      <Button onClick={onMatch} disabled={!favorites.size} variant="outlined">
         Match
       </Button>
       <Modal open={isModalOpen} onClose={onModalClose}>
