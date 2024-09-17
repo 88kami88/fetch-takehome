@@ -36,7 +36,7 @@ export function MatchButton() {
       >
         Match
       </Button>
-      <Modal open={isModalOpen}>
+      <Modal open={isModalOpen} onClose={onModalClose}>
         <Box
           sx={{
             position: "absolute",
