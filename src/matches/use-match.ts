@@ -10,6 +10,7 @@ export function useMatch() {
 
   const getMatches = useCallback(async () => {
     setIsLoading(true);
+    setError(null);
 
     try {
       const dog = await getMatch([...favorites]);
