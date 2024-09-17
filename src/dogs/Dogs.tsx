@@ -1,62 +1,23 @@
-import { useCallback, useEffect, useState } from "react";
-
-import { searchPath } from "../constants";
 import { DogCard } from "./DogCard";
-import { useBreed } from "../breeds/use-breed";
-import { Dog, searchDogs, SearchResponse } from "./dog-service";
 
 import "./Dogs.css";
 import { Box, CircularProgress } from "@mui/material";
+import { useDogs } from "./use-dogs";
 
 export default function Dogs() {
-  const [dogs, setDogs] = useState<Dog[]>([]);
-  const [searchResults, setSearchResults] = useState<
-    SearchResponse | undefined
-  >();
-  const [error, setError] = useState<string | undefined>();
-  const [isLoading, setIsLoading] = useState(false);
-  const { breeds, sort } = useBreed();
-
-  const onSearch = useCallback(
-    async (path: string, isCursor: boolean) => {
-      setIsLoading(true);
-      setDogs([]);
-      setSearchResults(undefined);
-      setError(undefined);
-
-      try {
-        const [search, dogs] = await searchDogs(path, breeds, sort, isCursor);
-
-        setSearchResults(search);
-        setDogs(dogs);
-      } catch {
-        setError("Unable to fetch dogs");
-      } finally {
-        setIsLoading(false);
-      }
-    },
-    [breeds, setDogs, setSearchResults, sort]
-  );
+  const { dogs, searchResults, isLoading, error, fetchDogs } = useDogs();
 
   function onPrev() {
-    if (!searchResults?.prev) {
-      return;
+    if (searchResults?.prev) {
+      fetchDogs(searchResults?.prev, true);
     }
-
-    onSearch(searchResults.prev, true);
   }
 
   function onNext() {
-    if (!searchResults?.next) {
-      return;
+    if (searchResults?.next) {
+      fetchDogs(searchResults?.next, true);
     }
-
-    onSearch(searchResults.next, true);
   }
-
-  useEffect(() => {
-    onSearch(`/dogs${searchPath}`, false);
-  }, [breeds, onSearch, sort]); // must re-search when breed or sort changes even though it's not a direct dependency
 
   if (error) {
     return error;
