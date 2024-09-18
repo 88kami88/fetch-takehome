@@ -7,15 +7,25 @@ import { useDogs } from "./use-dogs";
 export default function Dogs() {
   const { dogs, searchResults, isLoading, error, fetchDogs } = useDogs();
 
-  function onPrev() {
+  async function onPrev() {
     if (searchResults?.prev) {
-      fetchDogs(searchResults.prev, true);
+      await fetchDogs(searchResults.prev, true);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // Smooth scroll
+      });
     }
   }
 
-  function onNext() {
+  async function onNext() {
     if (searchResults?.next) {
-      fetchDogs(searchResults.next, true);
+      await fetchDogs(searchResults.next, true);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth", // Smooth scroll
+      });
     }
   }
 
