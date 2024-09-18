@@ -10,6 +10,7 @@ import { MatchButton } from "./matches/MatchButton";
 
 import "./App.css";
 import ClearFavorites from "./favorites/ClearFavoritesButton";
+import ShowFavoritesButton from "./favorites/ShowFavoritesButton";
 
 function App() {
   const { isLoggedIn } = useAuth();
@@ -33,6 +34,7 @@ function App() {
             <BreedSort />
             <MatchButton />
             <ClearFavorites />
+            <ShowFavoritesButton />
           </Box>
           <Dogs />
         </>
