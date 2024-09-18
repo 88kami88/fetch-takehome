@@ -5,7 +5,7 @@ interface FavoritesContextType {
   clearFavorites: () => void;
   error: string | null;
   favorites: Set<string>; // array of dog ids
-  loadDogs: () => Promise<Dog[] | undefined>;
+  loadDogs: () => Promise<Dog[] | null>;
   isLoadingDogs: boolean;
   toggleFavorite: (dogId: string) => void; // favorites on unfavorites a dog
 }
@@ -36,6 +36,8 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
     } finally {
       setIsLoadingDogs(false);
     }
+
+    return null;
   }, [favorites]);
 
   const toggleFavorite = useCallback(

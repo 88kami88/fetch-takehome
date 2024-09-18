@@ -2,16 +2,20 @@ import { useState } from "react";
 import { Box, Button, CircularProgress, Modal } from "@mui/material";
 
 import useFavorites from "./use-favorites";
+import { DogCard } from "../dogs/DogCard";
+import { Dog } from "../dogs/dog-service";
 
 export default function ShowFavoritesButton() {
   const { error, favorites, isLoadingDogs, loadDogs } = useFavorites();
+  const [loadedDogs, setLoadedDogs] = useState<Dog[] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  function onShowFavorites() {
-    // don't await, we'll display what we have when we have it
-    loadDogs();
-
+  async function onShowFavorites() {
+    setLoadedDogs(null);
     setIsModalOpen(true);
+
+    const dogs = await loadDogs();
+    setLoadedDogs(dogs || []);
   }
 
   function onModalClose() {
@@ -27,13 +31,13 @@ export default function ShowFavoritesButton() {
       >
         Show favorites
       </Button>
-      <Modal open={isModalOpen}>
+      <Modal
+        open={isModalOpen}
+        onClose={onModalClose}
+        sx={{ overflow: "auto" }}
+      >
         <Box
           sx={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
             width: "95%",
             bgcolor: "primary.dark",
             border: "2px solid #000",
@@ -48,7 +52,16 @@ export default function ShowFavoritesButton() {
           <h2>{isLoadingDogs ? "Getting favorites..." : "Your favorites"}</h2>
           {error && error}
           {isLoadingDogs && <CircularProgress />}
-          {favorites.size && <ul></ul>}
+
+          <ul>
+            {loadedDogs &&
+              loadedDogs.map((dog) => (
+                <li>
+                  <DogCard key={dog.id} dog={dog} />
+                </li>
+              ))}
+          </ul>
+
           <Button onClick={onModalClose} variant="contained">
             Close
           </Button>
