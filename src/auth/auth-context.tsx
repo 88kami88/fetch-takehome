@@ -1,3 +1,7 @@
+/**
+ * Auth context sets whether a user is logged in and their username
+ */
+
 import { createContext, ReactNode, useState } from "react";
 
 interface AuthContextType {
@@ -10,7 +14,6 @@ interface AuthContextType {
 export const AuthContext = createContext<AuthContextType | undefined>(
   undefined
 );
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");

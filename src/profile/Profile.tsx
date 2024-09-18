@@ -1,13 +1,7 @@
 import { Box, Button } from "@mui/material";
 
 import { useAuth } from "../auth/use-auth";
-import { logoutUrl } from "../constants";
-
-async function logout() {
-  await fetch(logoutUrl, {
-    credentials: "include",
-  });
-}
+import { logout } from "../auth/auth-service";
 
 export default function Profile() {
   const { setIsLoggedIn, setUsername, username } = useAuth();

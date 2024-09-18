@@ -1,3 +1,10 @@
+/**
+ * Generate a query string from a set of key value pairs. Supports arrays like
+ * key=value1&key=value2
+ *
+ * @param params Query params
+ * @returns query string
+ */
 export function buildQueryString(
   params: Record<
     string,

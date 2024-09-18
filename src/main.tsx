@@ -10,10 +10,9 @@ import { FavoritesProvider } from "./favorites/favorites-context.tsx";
 
 import "./index.css";
 
-// Define your custom theme
 const customTheme = createTheme({
   palette: {
-    mode: "dark", // Enable dark mode
+    mode: "dark",
     primary: {
       main: "#90caf9", // Light blue
     },
@@ -33,7 +32,6 @@ const customTheme = createTheme({
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider theme={customTheme}>
-      {/* CssBaseline helps reset default styles and apply your theme globally */}
       <CssBaseline />
       <AuthProvider>
         <BreedProvider>

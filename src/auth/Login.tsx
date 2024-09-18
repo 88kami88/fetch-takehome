@@ -2,7 +2,7 @@ import { FormEvent, useState } from "react";
 import { Button, TextField } from "@mui/material";
 
 import { useAuth } from "./use-auth";
-import { loginUrl } from "../constants";
+import { login } from "./auth-service";
 
 import "./Login.css";
 
@@ -10,9 +10,11 @@ export default function Login() {
   const { setIsLoggedIn, setUsername } = useAuth();
   const [nameError, setNameError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [authError, setAuthError] = useState<string | null>(null);
 
   async function onLogin(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    setAuthError(null);
 
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name") as string;
@@ -35,27 +37,19 @@ export default function Login() {
       return;
     }
 
-    // move fetching to useAuth
-    const res = await fetch(loginUrl, {
-      credentials: "include",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-      }),
-    });
+    try {
+      await login(name, email);
 
-    const status = res.status;
-
-    // use constants for 200
-    if (status === 200) {
       setIsLoggedIn(true);
       setUsername(name);
-    } else {
-      console.error("Login failed with status", status);
+    } catch (e) {
+      if (e instanceof Error) {
+        setAuthError(e.message);
+      }
+
+      if (typeof e === "string") {
+        setAuthError(e);
+      }
     }
   }
 
@@ -79,6 +73,7 @@ export default function Login() {
         error={!!emailError}
         helperText={emailError}
       />
+      {authError && authError}
       <Button variant="contained" type="submit">
         Login
       </Button>
