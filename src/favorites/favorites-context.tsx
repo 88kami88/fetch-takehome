@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useCallback, useState } from "react";
 
 interface FavoritesContextType {
+  clearFavorites: () => void;
   favorites: Set<string>; // array of dog ids
   toggleFavorite: (dogId: string) => void; // favorites on unfavorites a dog
 }
@@ -29,8 +30,14 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
     [favorites, setFavorites]
   );
 
+  const clearFavorites = useCallback(() => {
+    setFavorites(new Set());
+  }, []);
+
   return (
-    <FavoritesContext.Provider value={{ favorites, toggleFavorite }}>
+    <FavoritesContext.Provider
+      value={{ favorites, clearFavorites, toggleFavorite }}
+    >
       {children}
     </FavoritesContext.Provider>
   );
