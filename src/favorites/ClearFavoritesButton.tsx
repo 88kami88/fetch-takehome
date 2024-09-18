@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+
 import useFavorites from "./use-favorites";
 
 export default function ClearFavorites() {

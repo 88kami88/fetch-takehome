@@ -1,8 +1,9 @@
+import { Box, CircularProgress } from "@mui/material";
+
 import { DogCard } from "./DogCard";
+import { useDogs } from "./use-dogs";
 
 import "./Dogs.css";
-import { Box, CircularProgress } from "@mui/material";
-import { useDogs } from "./use-dogs";
 
 export default function Dogs() {
   const { dogs, searchResults, isLoading, error, fetchDogs } = useDogs();

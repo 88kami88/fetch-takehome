@@ -4,10 +4,11 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { CssBaseline } from "@mui/material";
 
 import App from "./App.tsx";
-import "./index.css";
 import { AuthProvider } from "./auth/auth-context.tsx";
 import { BreedProvider } from "./breeds/breed-context.tsx";
 import { FavoritesProvider } from "./favorites/favorites-context.tsx";
+
+import "./index.css";
 
 // Define your custom theme
 const customTheme = createTheme({

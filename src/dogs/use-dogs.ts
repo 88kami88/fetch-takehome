@@ -1,5 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import { Dog, searchDogs, SearchResponse } from "./dog-service";
+
 import { useBreed } from "../breeds/use-breed";
 import { searchPath } from "../constants";
 

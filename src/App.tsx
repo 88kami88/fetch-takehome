@@ -7,10 +7,10 @@ import Dogs from "./dogs/Dogs";
 import BreedFilter from "./breeds/BreedFilter";
 import BreedSort from "./breeds/BreedSort";
 import { MatchButton } from "./matches/MatchButton";
-
-import "./App.css";
 import ClearFavorites from "./favorites/ClearFavoritesButton";
 import ShowFavoritesButton from "./favorites/ShowFavoritesButton";
+
+import "./App.css";
 
 function App() {
   const { isLoggedIn } = useAuth();

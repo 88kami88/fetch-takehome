@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { Autocomplete, Box, TextField } from "@mui/material";
+
 import { breedsUrl } from "../constants";
 import { useBreed } from "./use-breed";
-import { Autocomplete, Box, TextField } from "@mui/material";
 
 export default function BreedFilter() {
   const [breeds, setBreeds] = useState<string[] | undefined>();
