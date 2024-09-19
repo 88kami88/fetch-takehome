@@ -1,23 +1,29 @@
 import { useEffect, useState } from "react";
 import { Autocomplete, Box, TextField } from "@mui/material";
 
-import { breedsUrl } from "../constants";
 import { useBreed } from "./use-breed";
+import { getBreeds } from "./breed-service";
 
 export default function BreedFilter() {
-  const [breeds, setBreeds] = useState<string[] | undefined>();
+  const [breeds, setBreeds] = useState<string[] | null>(null);
   const { selectBreeds } = useBreed();
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(breedsUrl, {
-        credentials: "include",
-      });
-      const json = await res.json();
+      try {
+        const breedsRes = await getBreeds();
 
-      // TODO error handling
+        setBreeds(breedsRes);
+      } catch (e) {
+        // On error just don't show breeds, but log
+        if (e instanceof Error) {
+          console.error(e.message);
+        }
 
-      setBreeds(json);
+        if (typeof e === "string") {
+          console.error(e);
+        }
+      }
     })();
   }, []);
 
@@ -30,7 +36,6 @@ export default function BreedFilter() {
   return (
     <Box sx={{ width: 300, margin: "0 auto", paddingTop: 0 }}>
       <Autocomplete
-        // value={breed ?? ""}
         onChange={(_, newValue) => onBreedsSelected(newValue)}
         options={options}
         renderInput={(params) => (
