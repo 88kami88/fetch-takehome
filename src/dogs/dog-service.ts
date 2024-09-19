@@ -30,6 +30,10 @@ export async function getDogsById(ids: string[]) {
     method: "POST",
   });
 
+  if (res.status >= 400) {
+    throw new Error(`Unexpected error fetching dogs: ${await res.text()}`);
+  }
+
   const dogs = (await res.json()) as Dog[];
 
   return dogs;
@@ -53,6 +57,12 @@ export async function searchDogs(
   const searchRes = await fetch(searchUrl, {
     credentials: "include",
   });
+
+  if (searchRes.status >= 400) {
+    throw new Error(
+      `Unexpected error searching dogs: ${await searchRes.text()}`
+    );
+  }
 
   const searchJson = (await searchRes.json()) as SearchResponse;
   const resultIds: SearchResultIds = searchJson.resultIds;

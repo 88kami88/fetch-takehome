@@ -14,15 +14,8 @@ export default function BreedFilter() {
         const breedsRes = await getBreeds();
 
         setBreeds(breedsRes);
-      } catch (e) {
+      } catch {
         // On error just don't show breeds, but log
-        if (e instanceof Error) {
-          console.error(e.message);
-        }
-
-        if (typeof e === "string") {
-          console.error(e);
-        }
       }
     })();
   }, []);

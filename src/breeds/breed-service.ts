@@ -6,7 +6,9 @@ export async function getBreeds() {
   });
 
   if (res.status >= 400) {
-    throw new Error("Unexpected error fetching breeds");
+    const error = `Unexpected error fetching breeds: ${await res.text()}`;
+    console.error(error);
+    throw new Error(error);
   }
 
   const json = (await res.json()) as string[];
