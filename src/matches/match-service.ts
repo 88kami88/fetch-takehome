@@ -15,7 +15,11 @@ export async function getMatch(dogIds: string[]) {
     method: "POST",
   });
 
-  // handle error
+  if (matchRes.status >= 400) {
+    const error = `Unexpected error matching: ${await matchRes.text()}`;
+    console.error(error);
+    throw new Error(error);
+  }
 
   const matchJson = (await matchRes.json()) as MatchResponse;
 

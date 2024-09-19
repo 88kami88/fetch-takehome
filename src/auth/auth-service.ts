@@ -16,7 +16,6 @@ export async function login(name: string, email: string) {
 
     const status = res.status;
 
-    // use constants for 200
     if (status >= 400) {
       console.error(await res.text());
       throw new Error("Unexpected error logging in");

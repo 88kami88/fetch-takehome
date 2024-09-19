@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 
 import { useAuth } from "./auth/use-auth";
 import Login from "./auth/Login";
-import Profile from "./profile/Profile";
+import Profile from "./auth/Profile";
 import Dogs from "./dogs/Dogs";
 import BreedFilter from "./breeds/BreedFilter";
 import BreedSort from "./breeds/BreedSort";

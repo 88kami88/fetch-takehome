@@ -25,6 +25,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
   const [isLoadingDogs, setIsLoadingDogs] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Full dog details. See above comments.
   const loadDogs = useCallback(async () => {
     setError(null);
     setIsLoadingDogs(true);
@@ -55,7 +56,7 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
         setFavorites(newFavorites);
       }
     },
-    [favorites, setFavorites]
+    [favorites]
   );
 
   const clearFavorites = useCallback(() => {

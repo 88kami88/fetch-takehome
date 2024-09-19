@@ -1,7 +1,7 @@
 import { Box, Button } from "@mui/material";
 
-import { useAuth } from "../auth/use-auth";
-import { logout } from "../auth/auth-service";
+import { useAuth } from "./use-auth";
+import { logout } from "./auth-service";
 
 export default function Profile() {
   const { setIsLoggedIn, setUsername, username } = useAuth();

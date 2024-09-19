@@ -52,6 +52,7 @@ export async function searchDogs(
     sort: `breed:${sort}`,
   });
 
+  // If isCursor, then we have a full path formed by the search service so don't append query string
   const searchUrl = isCursor
     ? `${baseUrl}${path}`
     : `${baseUrl}${path}${queryString}`;

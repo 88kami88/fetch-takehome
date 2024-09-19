@@ -13,6 +13,7 @@ export function useDogs() {
   const [isLoading, setIsLoading] = useState(false);
   const { breeds, sort } = useBreed();
 
+  // Used for subsequent fetches after the first one
   const fetchDogs = useCallback(
     async (path: string, isCursor: boolean = false) => {
       setIsLoading(true);
