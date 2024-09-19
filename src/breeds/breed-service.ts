@@ -5,6 +5,10 @@ export async function getBreeds() {
     credentials: "include",
   });
 
+  if (res.status >= 400) {
+    throw new Error("Unexpected error fetching breeds");
+  }
+
   const json = (await res.json()) as string[];
   return json;
 }
