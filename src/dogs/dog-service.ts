@@ -31,7 +31,9 @@ export async function getDogsById(ids: string[]) {
   });
 
   if (res.status >= 400) {
-    throw new Error(`Unexpected error fetching dogs: ${await res.text()}`);
+    const error = `Unexpected error fetching dogs: ${await res.text()}`;
+    console.error(error);
+    throw new Error(error);
   }
 
   const dogs = (await res.json()) as Dog[];
@@ -59,9 +61,9 @@ export async function searchDogs(
   });
 
   if (searchRes.status >= 400) {
-    throw new Error(
-      `Unexpected error searching dogs: ${await searchRes.text()}`
-    );
+    const error = `Unexpected error searching dogs: ${await searchRes.text()}`;
+    console.error(error);
+    throw new Error(error);
   }
 
   const searchJson = (await searchRes.json()) as SearchResponse;
