@@ -6,10 +6,10 @@ import { searchPath } from "../constants";
 
 export function useDogs() {
   const [dogs, setDogs] = useState<Dog[]>([]);
-  const [searchResults, setSearchResults] = useState<
-    SearchResponse | undefined
-  >();
-  const [error, setError] = useState<string | undefined>();
+  const [searchResults, setSearchResults] = useState<SearchResponse | null>(
+    null
+  );
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const { breeds, sort } = useBreed();
 
@@ -17,8 +17,8 @@ export function useDogs() {
     async (path: string, isCursor: boolean = false) => {
       setIsLoading(true);
       setDogs([]);
-      setSearchResults(undefined);
-      setError(undefined);
+      setSearchResults(null);
+      setError(null);
 
       try {
         const [search, dogs] = await searchDogs(path, breeds, sort, isCursor);
